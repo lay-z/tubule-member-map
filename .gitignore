@@ -1,0 +1,8 @@
+# them bower files
+static/bower_components
+
+# The usual pyc stuff
+*.pyc
+
+# Venv files
+/venv

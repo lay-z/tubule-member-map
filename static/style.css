@@ -1,0 +1,12 @@
+.alert-block {
+    margin-top: 14px;
+}
+
+#legend {
+    background: white;
+    padding: 10px;
+}
+
+#map {
+    height: 70%
+}

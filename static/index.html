@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<html>
+   <head>
+        <title>
+         Post Code Finder
+        </title>
+
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <!-- <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
+        <script src="bower_components/remarkable-bootstrap-notify/bootstrap-notify.js"></script>
+        <script src="bower_components/spin.js/spin.js"></script>
+        <script src="script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+        
+    </head>
+<body>
+<div class="container">
+    <h1>Member Search</h1>
+    <!-- <form> -->
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-8">
+                <input type="text" class="form-control" placeholder="Post Code" id="postCode"></input>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="form-group"> -->
+            <!-- <label for="distance">Distance Away</label> -->
+            <div class="col-xs-12 col-md-4">
+                <select class="input-group form-control" id="distance"> 
+                    <option>1 km</option>
+                    <option>2 km</option>
+                    <option>5 km</option>
+                    <option>10 km</option>
+                    <option>50 km</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-xs-12" id="btnRow">
+                <button type="submit" class="btn btn-danger" id="submitBtn" onclick="getMembers()">Find Members</button>
+            </div>
+        </div>
+
+    <!-- </form> -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="map"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-danger alert-block" id="csvButton" onclick="">Download to CSV</button>
+        </div>
+    </div>
+    <div id="legend">
+      My first legend!
+      <svg width="30" height=10 id="legendSVG">
+          <!-- <rect x="0" y="0" width="10px" height="10px"></rect> -->
+      </svg>
+    </div>
+</div>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEXl1EYiZIRRA_XhE-E7fTnS7oMvCjuQM&libraries=geometry,places&callback=init" async defer></script>
+</html>
