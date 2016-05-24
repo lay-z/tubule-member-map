@@ -40,6 +40,9 @@ function init(){
     zoom: 5
   });
 
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
+  document.getElementById('legend'));
+
   var defaultBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(NE_UK),
     new google.maps.LatLng(SW_UK)
@@ -73,7 +76,7 @@ function init(){
     
 
     // Place marker
-    placeMarker(newLocation, "red", "center point");
+    placeMarker(newLocation, iconType("teal"), "center point");
   })
 
 
@@ -124,16 +127,30 @@ $("document").ready(function() {
   })
 
   var legend = $('#legend');
-
-  $.each(icons, function(key, icon) {
-    console.log("working")
+  var i = 0;
+  var spacing = 2.5;
+  var size = 10;
+  var spacing = size/4;
+  var svgElements = [];
+  for (key in icons) {
+    var icon = icons[key];
+    console.log(key)
+    console.log(icon)
     // var svg = $("<svg height=10 width=10></svg>")
-    var rect = $("<rect x=0 y=0 width=10px height=10px></rect>",{
-      style: "fill: " + icon.fill + ";\n" + "strokeColor: " + icon.strokeColor + ";"
-    });
+    svgElements.push($("<rect x=0 y=" + (i * (size+spacing)) + " width="+size+" height="+size+" style='fill: " + icon.fillColor + "'></rect>"));
+    svgElements.push($("<text x="+ (size+spacing) +" y=" + (i*(size+spacing) + size-2) + " font-size=" + size + ">" + key +"</text>"));
+    i++
+  }
 
-    $("#legendSVG").append(rect);
-  });
+  var svg = $("<svg width=" + 15 * size + " height=" + i*(size+spacing) + "></svg")
+
+  for (i=0; i < svgElements.length; i++) {
+    svg.append(svgElements[i]);
+  }
+
+  legend.append(svg);
+  // Refresh html so that the svg elements load
+  legend.html(legend.html());
 
   // Get the spinner ready!
 
@@ -203,8 +220,8 @@ function getMembers() {
 function processData(data) {
   // Place markers for each onto map
   data.forEach(function(d) {
-    var icon = icons(d["Registrant Type"])
-    var m = placeMarker(d.location, icon, d["Registrant Type"])
+    var icon = icons[d["Registrant Type"]];
+    var m = placeMarker(d.location, icon, d["Registrant Type"]);
 
     // info window
     var contentString = '<div id="content">'+
