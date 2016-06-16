@@ -1,8 +1,10 @@
 # them bower files
 static/bower_components
 
-# The usual pyc stuff
+# The usual python stuff
 *.pyc
+.cache/
+TubuleMap.egg-info/
 
 # Venv files
 /venv

@@ -189,6 +189,8 @@ function getMembers() {
   console.log(spinner);
   // Extract distance information
   var distance = Number($("#distance option:selected").val().split(" ")[0]);
+  var membersOnly = $("#tubule_member option:selected").val();
+  var membersOnly = (membersOnly === 'true');
   // Make ajax request
 
   $.ajax({
@@ -196,7 +198,8 @@ function getMembers() {
       data: {
         "distance": distance,
         "lat": map.getCenter().lat,
-        "lng": map.getCenter().lng
+        "lng": map.getCenter().lng,
+        "members": membersOnly
       },
       success: function(response) {
         memberDataArray = response.data;

@@ -23,7 +23,12 @@ def members():
         return jsonify(**r)
     
     l = Location(col, expected_args["lat"], expected_args["lng"])
-    members = l.members_from_point(expected_args["distance"])
+    extra_query = []
+
+    if request.args.get("members") == "true":
+        extra_query.append({"tubuleMember": True})
+    print(extra_query)
+    members = l.members_from_point(expected_args["distance"], extra_query)
     print("Found {} members in database".format(len(members)))
 
     r = {
